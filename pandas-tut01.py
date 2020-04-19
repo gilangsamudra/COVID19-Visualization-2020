@@ -20,9 +20,10 @@ frate = df.pivot(index='Date', columns='Country', values='FRates')
 crate = df.pivot(index='Date', columns='Country', values='CRates')
 
 plt.figure(num=1, dpi=200)
-plot = covid19.plot(grid=False, title="COVID-19 Infection Number", fontsize=15,
-                    figsize=(12, 8), linewidth=5, legend=False, ax=plt.gca())
+plot = covid19.plot(grid=False, fontsize=15, figsize=(12, 8),
+                    linewidth=5, legend=False, ax=plt.gca())
 plot.grid(b=True, which='major', axis='y', ls='--', lw=.5, c='k', alpha=.3)
+plot.set_title("COVID-19 Infection Number", fontweight='bold', loc='center')
 plot.set_xlabel('Dates')
 plot.set_ylabel('# of Infected')
 for country in negara:
@@ -30,15 +31,18 @@ for country in negara:
               s=country+": "+str(int(covid19[country].tail(1))),
               fontsize=15)
 plot.text(x=covid19.index[1], y=-1850, s='Source: https://github.com/datasets/\
-covid-19/blob/master/data/countries-aggregated.csv', fontsize=15)
-plot.text(x=covid19.index[1], y=-2100, s="by: GSK", fontsize=15)
+covid-19/blob/master/data/countries-aggregated.csv', fontsize=12,
+          fontweight='bold')
+plot.text(x=covid19.index[1], y=-2100, s="by: GSK", fontsize=12,
+          fontweight='bold')
 plt.savefig('Infected Number.png', bbox_inches="tight")
 
 
 plt.figure(num=2, dpi=200)
-plot = death.plot(grid=False, title="COVID-19 Total Death", fontsize=15,
-                  figsize=(12, 8), linewidth=5, legend=False, ax=plt.gca())
+plot = death.plot(grid=False, fontsize=15, figsize=(12, 8), linewidth=5,
+                  legend=False, ax=plt.gca())
 plot.grid(b=True, which='major', axis='y', ls='--', lw=.5, c='k', alpha=.3)
+plot.set_title("COVID-19 Total Death", fontweight='bold', loc='center')
 plot.set_xlabel('Dates')
 plot.set_ylabel('# of Death')
 for country in negara:
@@ -46,14 +50,17 @@ for country in negara:
               s=country+": "+str(int(death[country].tail(1))),
               fontsize=15)
 plot.text(x=covid19.index[1], y=-160, s='Source: https://github.com/datasets/\
-covid-19/blob/master/data/countries-aggregated.csv', fontsize=15)
-plot.text(x=covid19.index[1], y=-180, s="by: GSK", fontsize=15)
+covid-19/blob/master/data/countries-aggregated.csv', fontsize=12,
+          fontweight='bold')
+plot.text(x=covid19.index[1], y=-180, s="by: GSK", fontsize=12,
+          fontweight='bold')
 plt.savefig('Death Number.png', bbox_inches="tight")
 
 plt.figure(num=3, dpi=200)
-plot = frate.plot(grid=False, title="COVID-19 Fatality Rate", fontsize=15,
-                  figsize=(12, 8), linewidth=5, legend=False, ax=plt.gca())
+plot = frate.plot(grid=False, fontsize=15, figsize=(12, 8), linewidth=5,
+                  legend=False, ax=plt.gca())
 plot.grid(b=True, which='major', axis='y', ls='--', lw=.5, c='k', alpha=.3)
+plot.set_title("COVID-19 Fatality Rate", fontweight='bold', loc='center')
 plot.set_xlabel('Dates')
 plot.set_ylabel('Fatality Rate (%)')
 for country in negara:
@@ -61,6 +68,8 @@ for country in negara:
               s=country+": "+str(float("%.2f" % frate[country].tail(1)))+'%',
               fontsize=15)
 plot.text(x=covid19.index[1], y=-2.5, s='Source: https://github.com/datasets/\
-covid-19/blob/master/data/countries-aggregated.csv', fontsize=15)
-plot.text(x=covid19.index[1], y=-2.8, s="by: GSK", fontsize=15)
+covid-19/blob/master/data/countries-aggregated.csv', fontsize=12,
+          fontweight='bold')
+plot.text(x=covid19.index[1], y=-2.8, s="by: GSK", fontsize=12,
+          fontweight='bold')
 plt.savefig('Fatality Rate.png', bbox_inches="tight")

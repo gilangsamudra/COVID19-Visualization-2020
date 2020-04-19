@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 # Bagian 1 -- Load data dari sumbernya
 df = pd.read_csv(
@@ -19,16 +19,27 @@ alt_data = df[(df["Country"] == 'Indonesia') | (df['Country'] == 'Malaysia') |
               (df['Country'] == 'Singapore')]
 
 covid19 = ims_data.pivot(index='Date', columns='Country', values='Confirmed')
+death = ims_data.pivot(index='Date', columns='Country', values='Deaths')
 
 plt.style.use('fivethirtyeight')
 plt.figure(dpi=200)
-plot = covid19.plot(figsize=(12, 8), linewidth=5, legend=False, ax=plt.gca())
+plot = covid19.plot(figsize=(12, 8), linewidth=5, legend=True, ax=plt.gca())
 plot.set_xlabel('Dates')
 plot.set_ylabel('# of Infected')
 
 # Section 8 - Assigning Colour
 for country in negara:
-    plot.text(x=covid19.index[-1], y=covid19[country].max(), s=country,
+    plot.text(x=covid19.index[-1], y=covid19[country].max(), s=covid19[country].max(),
+              weight='bold')
+
+plt.figure(dpi=200)
+plot = death.plot(figsize=(12, 8), linewidth=5, legend=True, ax=plt.gca())
+plot.set_xlabel('Dates')
+plot.set_ylabel('# of Infected')
+
+# Section 8 - Assigning Colour
+for country in negara:
+    plot.text(x=death.index[-1], y=death[country].max(), s=death[country].max(),
               weight='bold')
 
 df.to_excel('covid19.xlsx', sheet_name='COVID19 Data', index=False)
